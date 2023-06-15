@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap');
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+    background-image: linear-gradient( #00000056, #00000056),url('../img/background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    display: block;
+}
+
+html,body{
+    width: 100%;
+    height: 100%;
+}
+
+body *{
+    box-sizing: border-box;
+}
+
+/*------ Start Main ------*/
+.main-login{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.left{
+    width: 50vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.left > h1,h2{
+    color: #ffffff;
+    font-size: 2vw;
+    letter-spacing: 1px;
+}
+
+.left-image{
+    width: 30vw;
+}
+
+.right{
+    width: 50vw;
+    height: 100vh;
+    background: #ffb03b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-login{
+    width: 50%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px 35px;
+    background: aliceblue;
+    border-radius: 20px;
+    box-shadow: 0px 10px 40px #00000056;
+}
+
+.card-login > h1{
+    color: #ffb03b;
+    font-weight: 800;
+    margin: 0;
+}
+
+form{
+    width: 100%;
+}
+
+.textfield{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 10px 0px;
+}
+
+.textfield > input{
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 15px;
+    background: #ffffff;
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px #ffb03b56;
+    outline-color: #ffb03b;
+    box-sizing: border-box;
+}
+
+.textfield > label{
+    margin-bottom: 10px;
+}
+
+.btn-login{
+    width: 100%;
+    padding: 16px 0px;
+    margin: 10px 0px;
+    border: none;
+    border-radius: 15px;
+    outline: none;
+    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 3px;
+    background: #ffb03b;
+    cursor: pointer;
+    box-shadow: 0px 10px 40px -12px #00000052;
+}
+
+/*------ Start Responsivo ------*/
+@media only screen and (max-width:950px){
+    .card-login{
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width:600px){
+    .main-login{
+        flex-direction: column;
+    }
+
+    .left > h1,.left-image{
+        display: none;
+    }
+
+    .left{
+        width: 100%;
+        height: 0%;
+    }
+
+    .right{
+        width: 100%;
+        height: 100%;
+        background: none;
+        margin-bottom: 5vw;
+    }
+
+    .left-image{
+        width: 75vw;
+    }
+    
+    .card-login{
+        width: 90%;
+    }
+}
+/*------ End Responsivo ------*/
+
+#btnAnt,#btnVolta{
+    float: left;
+    width: 45%;
+    background: #afaeae;
+}
+
+#btnEnvia,#btnProx{
+    width: 45%;
+    margin-left: 2vw;
+}
+    
+.password-eye{
+    width: 100%;
+    position: relative;
+  }
+  .password-eye input[type="password"],
+  .password-eye input[type="text"]{
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    margin: 5px 0px;
+    padding: 15px;
+    background: #ffffff;
+    font-size: 12pt;
+    box-shadow: 0px 10px 40px #ffb03b56;
+    outline-color: #ffb03b;
+    box-sizing: border-box;
+  }
+  .fa-eye{
+    position: absolute;
+    top: 55%;
+    right: 4%;
+    cursor: pointer;
+    color: rgb(163, 163, 163);
+  }
+/*------ End Main ------*/
