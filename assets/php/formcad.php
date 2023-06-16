@@ -19,7 +19,7 @@
 
     $consulta=$conexao->query($sql);
     if($consulta==true){
-        header('Location: ../../index.html');    
+        header('Location: ../../login.php');    
     }else{
         header('Location: ../../cadastro.php');     
     }

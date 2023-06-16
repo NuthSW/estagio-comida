@@ -10,7 +10,7 @@
     if($consulta->num_rows > 0){
         session_start();
         $_SESSION['login'] ='ok';
-        header('location: ../../index.html?login=ok');
+        header('location: ../../index.php?login=ok');
     }else{
         header('location: ../../login.php?login=erro');
     }
