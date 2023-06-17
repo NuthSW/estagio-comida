@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Delicious Bootstrap Template</title>
+  <title>Delixioso - Monte seu Pedido</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -46,52 +46,6 @@
     </div>
   </section>
 
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top d-flex align-items-center ">
-    <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-
-      <div class="logo me-auto">
-        <h1><a href="index.html">Delicious</a></h1>
-        <!-- Uncomment below if you prefer to use an image logo -->
-        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
-      </div>
-
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
-          <li><a class="nav-link scrollto" href="#specials">Specials</a></li>
-          <li><a class="nav-link scrollto" href="#events">Events</a></li>
-          <li><a class="nav-link scrollto" href="#chefs">Chefs</a></li>
-          <li><a class="nav-link scrollto" href="#gallery">Gallery</a></li>
-          <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i class="bi bi-chevron-right"></i></a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 2</a></li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-            </ul>
-          </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-      <a href="#book-a-table" class="book-a-table-btn scrollto">Book a table</a>
-
-    </div>
-  </header><!-- End Header -->
-
   <main id="main">
 
     <!-- ======= Breadcrumbs Section ======= -->
@@ -99,15 +53,69 @@
       <div class="container">
 
         <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
+          <h2>Faça seu pedido</h2>
           <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Inner Page</li>
+            <li><a href="index.php">Início</a></li>
+            <li>Pedido</li>
           </ol>
+        </div>
+        <hr>
+      </div>
+    </section><!-- End Breadcrumbs Section -->
+
+    <section id="pedido" class="menu">
+      <div class="container">
+
+        <div class="section-title">
+          <h2><span>Monte o seu pedido</span></h2>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="menu-flters">
+              <li data-filter="*" class="filter-active" id="todos">Todos</li>
+              <li data-filter=".filter-aperitivos" id="aperitivos">Aperitivos</li>
+              <li data-filter=".filter-pizzas" id="pizzas">Pizzas</li>
+              <li data-filter=".filter-hamburgueres" id="hamburgueres">Hambúrgueres</li>
+              <li data-filter=".filter-pasteis" id="pasteis">Pastéis</li>
+              <li data-filter=".filter-sobremesas" id="sobremesas">Sobremesas</li>
+              <li data-filter=".filter-bebidas" id="bebidas">Bebidas</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row menu-container">
+          
+          <?php
+            include('assets/php/banco.php');
+            $sql="select * from tbproduto";
+
+            $consulta=$conexao->query($sql);
+
+            if($consulta){
+              if($consulta->num_rows>0){
+                while($linha=$consulta->fetch_array(MYSQLI_ASSOC)){
+                      echo '<div class="col-lg-6 menu-item filter-'.$linha['tipo'].'">
+                      <div class="menu-content">
+                      <label class="check">
+                        <input type="checkbox">
+                        <div class="checkmark"></div>
+                      </label>
+                        <a href="#">'.$linha['nome'].'</a><span>R$'.$linha['preco'].'</span>
+                      </div>
+                      <div class="menu-ingredients">'.$linha['descricao'].'</div>
+                    </div>';
+                }
+              }else{
+                        echo '<p>Como chegamos aqui?</p>'  ;
+              }
+            }
+          ?>
+
         </div>
 
       </div>
-    </section><!-- End Breadcrumbs Section -->
+    </section><!-- End Menu Section -->
 
     <section class="inner-page">
       <div class="container">
@@ -155,6 +163,8 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/jquery3/jquery.js"></script>
+  <script src="assets/js/menu.js"></script>
 
 </body>
 

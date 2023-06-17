@@ -594,12 +594,12 @@ section {
   padding: 20px 0;
   background-color: #f2f1ef;
   min-height: 40px;
-  margin-top: 120px;
+  margin-top: 50px;
 }
 
 @media (max-width: 992px) {
   .breadcrumbs {
-    margin-top: 70px;
+    margin-top: 50px;
   }
 }
 
@@ -1370,8 +1370,9 @@ section {
 }
 
 .testimonials .testimonial-item .testimonial-img {
-  width: 100px;
-  border-radius: 50%;
+  width: 200px;
+  border-radius: 10%;
+  image-orientation: from-image;
   border: 6px solid rgba(255, 255, 255, 0.15);
   margin: 0 auto;
 }
@@ -1770,11 +1771,7 @@ section {
   background: #d3af71;
 }
 
-
-
-
-
-
+/* Criando card de cupom */
 .card-especial {
   overflow: visible;
   width: 190px;
@@ -1791,6 +1788,7 @@ section {
   border-radius: 5px;
 }
 
+/* Estilizando frente e verso */
 .front, .back {
   background-color: #151515;
   position: absolute;
@@ -1825,6 +1823,7 @@ section {
   gap: 30px;
 }
 
+/* Criando animação */
 .card-especial:hover .content-especial {
   transform: rotateY(180deg);
 }
@@ -1854,6 +1853,7 @@ section {
   justify-content: space-between;
 }
 
+/* Criando interior do card*/
 .front-content .badge {
   background-color: #00000055;
   padding: 2px 10px;
@@ -1912,4 +1912,73 @@ section {
   background-position: center;
   background-size: cover;
   backdrop-filter: blur(2px);
+}
+
+#pedido{
+  background-color: #f2f1ef;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: blur(2px);
+}
+
+#pedido .container{
+  box-shadow: 0px 10px 40px #000000a8;
+}
+
+/* Esconder o checkbox */
+.check input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.check {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+}
+
+/* Criaçao do novo checkbox */
+.checkmark {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 1.3em;
+  width: 1.3em;
+  background-color: #ccc;
+  border-radius: 0.2pc;
+  box-shadow: 3px 3px grey;
+}
+
+/* Quando checked = adcione um fundo verde */
+.container input:checked ~ .checkmark {
+  background-color: #5ee429;
+}
+
+/* Criando o marcador */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Mostrar o marcador */
+.check input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Estilizando o marcador */
+.check .checkmark:after {
+  left: 0.45em;
+  top: 0.25em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid white;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
 }

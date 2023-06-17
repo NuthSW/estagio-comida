@@ -30,6 +30,7 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/loader.css" rel="stylesheet">
 
   <!-- =======================================================
   * Template Name: Delicious
@@ -66,6 +67,7 @@
           <li><a class="nav-link scrollto" href="#about">Sobre</a></li>
           <li><a class="nav-link scrollto" href="#menu">Menu</a></li>
           <li><a class="nav-link scrollto" href="#gallery">Especial do dia</a></li>
+          <li><a class="nav-link scrollto" href="#testimonials">Mais pedidos</a></li>
           <li><a class="nav-link scrollto" href="#contact">Contato</a></li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
@@ -205,111 +207,36 @@
               <li data-filter=".filter-pizzas" id="pizzas">Pizzas</li>
               <li data-filter=".filter-hamburgueres" id="hamburgueres">Hambúrgueres</li>
               <li data-filter=".filter-pasteis" id="pasteis">Pastéis</li>
+              <li data-filter=".filter-sobremesas" id="sobremesas">Sobremesas</li>
               <li data-filter=".filter-bebidas" id="bebidas">Bebidas</li>
             </ul>
           </div>
         </div>
 
         <div class="row menu-container">
+          
+          <?php
+            include('assets/php/banco.php');
+            $sql="select * from tbproduto";
 
-          <div class="col-lg-6 menu-item filter-pizzas">
-            <div class="menu-content">
-              <a href="#">Calabresa</a><span>$5.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
+            $consulta=$conexao->query($sql);
 
-          <div class="col-lg-6 menu-item filter-bebidas">
-            <div class="menu-content">
-              <a href="#">Coca-cola 2L</a><span>$6.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
+            if($consulta){
+              if($consulta->num_rows>0){
+                while($linha=$consulta->fetch_array(MYSQLI_ASSOC)){
+                      echo '<div class="col-lg-6 menu-item filter-'.$linha['tipo'].'">
 
-          <div class="col-lg-6 menu-item filter-aperitivos">
-            <div class="menu-content">
-              <a href="#">Batatas-Fritas</a><span>$5.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-aperitivos">
-            <div class="menu-content">
-              <a href="#">Rolinho Primavera</a><span>$6.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-pizzas">
-            <div class="menu-content">
-              <a href="#">Portuguesa</a><span>$7.95</span>
-            </div>
-            <div class="menu-ingredients">
-              A delicate crab cake served on a toasted roll with lettuce and tartar sauce
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-hamburgueres">
-            <div class="menu-content">
-              <a href="#">X-Bacon</a><span>$8.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-bebidas">
-            <div class="menu-content">
-              <a href="#">Fanta 2L</a><span>$9.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Grilled chicken with provolone, artichoke hearts, and roasted red pesto
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-aperitivos">
-            <div class="menu-content">
-              <a href="#">Bolinha de peixe</a><span>$4.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Lorem, deren, trataro, filede, nerada
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-pasteis">
-            <div class="menu-content">
-              <a href="#">Queijo</a><span>$9.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Fresh spinach, crisp romaine, tomatoes, and Greek olives
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-pasteis">
-            <div class="menu-content">
-              <a href="#">Carne</a><span>$9.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Fresh spinach with mushrooms, hard boiled egg, and warm bacon vinaigrette
-            </div>
-          </div>
-
-          <div class="col-lg-6 menu-item filter-hamburgueres">
-            <div class="menu-content">
-              <a href="#">Puro Cheddar</a><span>$12.95</span>
-            </div>
-            <div class="menu-ingredients">
-              Plump lobster meat, mayo and crisp lettuce on a toasted bulky roll
-            </div>
-          </div>
+                      <div class="menu-content">
+                        <a href="#">'.$linha['nome'].'</a><span>R$'.$linha['preco'].'</span>
+                      </div>
+                      <div class="menu-ingredients">'.$linha['descricao'].'</div>
+                    </div>';
+                }
+              }else{
+                        echo '<p>Como chegamos aqui?</p>'  ;
+              }
+            }
+          ?>
 
         </div>
         <div class="text-center">
@@ -343,19 +270,19 @@
               <div class="front">
                 
                 <div class="img">
-                  <img src="https://i0.wp.com/mercadoeconsumo.com.br/wp-content/uploads/2019/04/Que-comida-saudável-que-nada-brasileiro-gosta-de-fast-food.jpg?fit=1600%2C1067&ssl=1" style="width:500px;">
+                  <img src="assets/img/specials/especial-1.jpg" style="width:300px;">
                 </div>
           
                 <div class="front-content">
-                  <small class="badge">Anburge</small>
+                  <small class="badge">Corbucci</small>
                   <div class="description-especial">
                     <div class="title-especial">
                       <p class="title-especial">
-                        <strong>R$34,50</strong>
+                        <strong>DESAFIO</strong>
                       </p>
                     </div>
                     <p class="card-footer-especial">
-                      30 Mins &nbsp; | &nbsp; 1 Serving
+                      Se terminar em 20 min NÃO PAGA.
                     </p>
                   </div>
                 </div>
@@ -374,19 +301,19 @@
               <div class="front">
                 
                 <div class="img">
-                  <img src="https://i0.wp.com/mercadoeconsumo.com.br/wp-content/uploads/2019/04/Que-comida-saudável-que-nada-brasileiro-gosta-de-fast-food.jpg?fit=1600%2C1067&ssl=1" style="width:500px; filter: blur(2px);">
+                <img src="assets/img/specials/especial-2.jpg" style="width:300px;">
                 </div>
           
                 <div class="front-content">
-                  <small class="badge">Anburge</small>
+                  <small class="badge">Pizzas</small>
                   <div class="description-especial">
                     <div class="title-especial">
                       <p class="title-especial">
-                        <strong>R$34,50</strong>
+                        <strong>DESCONTO</strong>
                       </p>
                     </div>
                     <p class="card-footer-especial">
-                      30 Mins &nbsp; | &nbsp; 1 Serving
+                      5% em todas as pizzas. Exceto doces.
                     </p>
                   </div>
                 </div>
@@ -405,19 +332,19 @@
               <div class="front">
                 
                 <div class="img">
-                  <img src="https://i0.wp.com/mercadoeconsumo.com.br/wp-content/uploads/2019/04/Que-comida-saudável-que-nada-brasileiro-gosta-de-fast-food.jpg?fit=1600%2C1067&ssl=1" style="width:500px; filter: blur(2px);">
+                <img src="assets/img/specials/especial-3.jpg" style="width:300px;">
                 </div>
           
                 <div class="front-content">
-                  <small class="badge">Anburge</small>
+                  <small class="badge">X-Tudão</small>
                   <div class="description-especial">
                     <div class="title-especial">
                       <p class="title-especial">
-                        <strong>R$34,50</strong>
+                        <strong>BÔNUS</strong>
                       </p>
                     </div>
                     <p class="card-footer-especial">
-                      30 Mins &nbsp; | &nbsp; 1 Serving
+                      Acompanha batata e refri lata
                     </p>
                   </div>
                 </div>
@@ -436,19 +363,19 @@
               <div class="front">
                 
                 <div class="img">
-                  <img src="https://i0.wp.com/mercadoeconsumo.com.br/wp-content/uploads/2019/04/Que-comida-saudável-que-nada-brasileiro-gosta-de-fast-food.jpg?fit=1600%2C1067&ssl=1" style="width:500px; filter: blur(2px);">
+                <img src="assets/img/specials/especial-4.jpg" style="width:300px;">
                 </div>
           
                 <div class="front-content">
-                  <small class="badge">Anburge</small>
+                  <small class="badge">Pizzas doces</small>
                   <div class="description-especial">
                     <div class="title-especial">
                       <p class="title-especial">
-                        <strong>R$34,50</strong>
+                        <strong>DESCONTO</strong>
                       </p>
                     </div>
                     <p class="card-footer-especial">
-                      30 Mins &nbsp; | &nbsp; 1 Serving
+                      Todas as pizzas com 5% de desconto.
                     </p>
                   </div>
                 </div>
@@ -467,19 +394,19 @@
               <div class="front">
                 
                 <div class="img">
-                  <img src="https://i0.wp.com/mercadoeconsumo.com.br/wp-content/uploads/2019/04/Que-comida-saudável-que-nada-brasileiro-gosta-de-fast-food.jpg?fit=1600%2C1067&ssl=1" style="width:500px; filter: blur(2px);">
+                <img src="assets/img/specials/especial-5.jpg" style="width:300px;">
                 </div>
           
                 <div class="front-content">
-                  <small class="badge">Anburge</small>
+                  <small class="badge">Tortas</small>
                   <div class="description-especial">
                     <div class="title-especial">
                       <p class="title-especial">
-                        <strong>R$34,50</strong>
+                        <strong>ESPECIAL</strong>
                       </p>
                     </div>
                     <p class="card-footer-especial">
-                      30 Mins &nbsp; | &nbsp; 1 Serving
+                      Todas as tortas com 7% de desconto.
                     </p>
                   </div>
                 </div>
@@ -501,80 +428,90 @@
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-1.jpg" class="testimonial-img" alt="">
-                <h3>Saul Goodman</h3>
-                <h4>Ceo &amp; Founder</h4>
+                <img src="assets/img/specials/especial-1.jpg" class="testimonial-img" alt="">
+                <h3>Corbucci</h3>
+                <h4>O Monstro é preparado na cozinha</h4>
                 <div class="stars">
                   <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </div>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.
+                  Um hambúrguer com três carnes bovinas grelhadas de 113g, pão com gergelim, queijo derretido, fatias de bacon crocante e o exclusivo molho Delixioso.
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  <br>
+                  Tudo isso para ver se VOCÊ tem estômago o suficiente pra uma belezura dessas.
                 </p>
               </div>
             </div><!-- End testimonial item -->
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-2.jpg" class="testimonial-img" alt="">
-                <h3>Sara Wilsson</h3>
-                <h4>Designer</h4>
+                <img src="assets/img/specials/especial-6.avif" class="testimonial-img" alt="">
+                <h3>Gostosão</h3>
+                <h4>Já viu nome combinar com a aparência?</h4>
                 <div class="stars">
                   <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </div>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.
+                  Copo feito com nosso delicioso mousse de Ninho, massa de brownie, brigadeiro cremoso, morangos selecionados e creme quatro leites
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  <br>
+                  Uma sobremesa imperdível, não experimentar deveria ser considerado crime.
                 </p>
               </div>
             </div><!-- End testimonial item -->
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-3.jpg" class="testimonial-img" alt="">
-                <h3>Jena Karlis</h3>
-                <h4>Store Owner</h4>
+                <img src="assets/img/specials/especial-3.jpg" class="testimonial-img" alt="">
+                <h3>X-Tudão</h3>
+                <h4>Perfeitamente balanceado, como tudo deveria ser...</h4>
                 <div class="stars">
                   <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </div>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.
+                  Um hambúrguer com uma carne bovina grelhada de 113g, pão com gergelim, queijo derretido, onion rings , fatias de bacon crocante, pimenta-jalapeño, salada fresca (alface e tomate), o exclusivo molho furioso e maionese
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  <br>
+                  Para você que quer de tudo um pouco.
                 </p>
               </div>
             </div><!-- End testimonial item -->
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-4.jpg" class="testimonial-img" alt="">
-                <h3>Matt Brandon</h3>
-                <h4>Freelancer</h4>
+                <img src="assets/img/specials/especial-4.jpg" class="testimonial-img" alt="">
+                <h3>Pizza de Nutella</h3>
+                <h4>Não colocando abacaxi ta tudo bem...</h4>
                 <div class="stars">
                   <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </div>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.
+                  Nutella com leite ninho, confeito e morangos(opcional)
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  <br>
+                  Fica ótimo com alguns morangos.
                 </p>
               </div>
             </div><!-- End testimonial item -->
 
             <div class="swiper-slide">
               <div class="testimonial-item">
-                <img src="assets/img/testimonials/testimonials-5.jpg" class="testimonial-img" alt="">
-                <h3>John Larson</h3>
-                <h4>Entrepreneur</h4>
+                <img src="assets/img/specials/especial-5.jpg" class="testimonial-img" alt="">
+                <h3>Torta de Brownie</h3>
+                <h4>Bolo? Isso é muito padrão</h4>
                 <div class="stars">
                   <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                 </div>
                 <p>
                   <i class="bx bxs-quote-alt-left quote-icon-left"></i>
-                  Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam esse veniam culpa fore nisi cillum quid.
+                  Torta feita com massa de Brownie com cobertura de creme quatro leites, brigadeiro gourmet e morangos selecionados
                   <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                  <br>
+                  Quer comer um bolo, mas quer algo diferente? Nesse caso, essa torta é perfeita pra você.
                 </p>
               </div>
             </div><!-- End testimonial item -->
@@ -680,11 +617,43 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/jquery3/jquery.js"></script>
+  <script src="assets/js/menu.js"></script>
+
+   <!-- Inicio do modal -->
+
+   <div class="modal fade" id="modal" > 
+    <div class="modal-dialog"> 
+      <div class="modal-content"> 
+ <!--**********MONTA CORPO***********--> 
+        <div class="modal-body" id="corpoModal">
+          <div class="loader1"></div>
+          <div class="spinnerContainer">
+            <div class="loader">
+              <p>carregando</p>
+              <div class="words">
+                <span class="word">comidas</span>
+                <span class="word">imagens</span>
+                <span class="word">texto</span>
+                <span class="word">pedido</span>
+                <span class="word">página</span>
+              </div>
+            </div>
+          </div>
+        </div> 
+ <!--**********MONTA RODAPE ***********--> 
+      </div> 
+    </div> 
+  </div> 
+  <!-- Fim do modal -->
 
   <script>
     $('document').ready(function(){
       let data = new Date();
       let weekday = data.getDay()+1; // 1
+
+      $('#menu-btn').click(function(){
+        $("#modal").modal('show')
+      })
 
       if(weekday==2){
         $('#segunda').attr('src','assets/img/specials/gift1.png')
@@ -701,32 +670,6 @@
       if(weekday==6){
         $('#sexta').attr('src','assets/img/specials/gift1.png')
       }
-
-      $('#todos').click(function(){
-        $("#menu").css({"background": "linear-gradient( #0000007e, #00000077),url('assets/img/background.jpg')","background-repeat": "no-repeat","background-size": "cover"});
-
-      })
-      $('#aperitivos').click(function(){
-        $("#menu").css({"background": "linear-gradient( #0000007e, #00000077),url('assets/img/menu/aperitivos.jpg')","background-repeat": "no-repeat","background-size": "cover"});
-
-      })
-      $('#pizzas').click(function(){
-        $("#menu").css({"background": "linear-gradient( #0000007e, #00000077),url('assets/img/menu/pizzas.jpg')","background-repeat": "no-repeat","background-size": "cover"});
-
-      })
-      $('#hamburgueres').click(function(){
-        $("#menu").css({"background": "linear-gradient( #0000007e, #00000077),url('assets/img/menu/hamburgueres.jpg')","background-repeat": "no-repeat","background-size": "cover"});
-
-      })
-      $('#pasteis').click(function(){
-        $("#menu").css({"background": "linear-gradient( #0000007e, #00000077),url('assets/img/menu/pasteis.jpg')","background-repeat": "no-repeat","background-size": "cover"});
-
-      })
-      $('#bebidas').click(function(){
-        $("#menu").css({"background": "linear-gradient( #0000007e, #00000077),url('assets/img/menu/bebidas.jpg')","background-repeat": "no-repeat","background-size": "cover"});
-
-      })
-    
     })
   </script>
 </body>

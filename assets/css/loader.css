@@ -1,0 +1,177 @@
+.loader1 {
+    position: relative;
+    font-size: 16px;
+    width: 5.5em;
+    height: 5.5em;
+  }
+  
+  .loader1:before {
+    content: '';
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(45deg);
+    height: 100%;
+    width: 4px;
+    background: #ccc;
+    left: 50%;
+    top: 50%;
+  }
+  
+  .loader1:after {
+    content: '';
+    position: absolute;
+    left: 0.2em;
+    bottom: 0.18em;
+    width: 1em;
+    height: 1em;
+    background-color: orange;
+    border-radius: 15%;
+    animation: rollingRock 2.5s cubic-bezier(.79, 0, .47, .97) infinite;
+  }
+  
+  @keyframes rollingRock {
+    0% {
+      transform: translate(0, -1em) rotate(-45deg)
+    }
+  
+    5% {
+      transform: translate(0, -1em) rotate(-50deg)
+    }
+  
+    20% {
+      transform: translate(1em, -2em) rotate(47deg)
+    }
+  
+    25% {
+      transform: translate(1em, -2em) rotate(45deg)
+    }
+  
+    30% {
+      transform: translate(1em, -2em) rotate(40deg)
+    }
+  
+    45% {
+      transform: translate(2em, -3em) rotate(137deg)
+    }
+  
+    50% {
+      transform: translate(2em, -3em) rotate(135deg)
+    }
+  
+    55% {
+      transform: translate(2em, -3em) rotate(130deg)
+    }
+  
+    70% {
+      transform: translate(3em, -4em) rotate(217deg)
+    }
+  
+    75% {
+      transform: translate(3em, -4em) rotate(220deg)
+    }
+  
+    100% {
+      transform: translate(0, -1em) rotate(-225deg)
+    }
+  }
+
+  .spinnerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .loader {
+    color: #4a4a4a;
+    font-family: "Poppins",sans-serif;
+    font-weight: 500;
+    font-size: 25px;
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+    height: 40px;
+    padding: 10px 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    border-radius: 8px;
+  }
+  
+  .words {
+    overflow: hidden;
+  }
+  
+  .word {
+    display: block;
+    height: 100%;
+    padding-left: 6px;
+    color: #ffcd27;
+    animation: cycle-words 5s infinite;
+  }
+  
+  @keyframes cycle-words {
+    10% {
+      -webkit-transform: translateY(-105%);
+      transform: translateY(-105%);
+    }
+  
+    25% {
+      -webkit-transform: translateY(-100%);
+      transform: translateY(-100%);
+    }
+  
+    35% {
+      -webkit-transform: translateY(-205%);
+      transform: translateY(-205%);
+    }
+  
+    50% {
+      -webkit-transform: translateY(-200%);
+      transform: translateY(-200%);
+    }
+  
+    60% {
+      -webkit-transform: translateY(-305%);
+      transform: translateY(-305%);
+    }
+  
+    75% {
+      -webkit-transform: translateY(-300%);
+      transform: translateY(-300%);
+    }
+  
+    85% {
+      -webkit-transform: translateY(-405%);
+      transform: translateY(-405%);
+    }
+  
+    100% {
+      -webkit-transform: translateY(-400%);
+      transform: translateY(-400%);
+    }
+  }
+
+
+  #modal {
+    text-align: center;
+  }
+
+  .modal-dialog {
+    display: inline-block;
+    vertical-align: middle;
+  }   
+
+  @media screen and (min-width: 768px) {
+    #modal:before {
+      display: inline-block;
+      vertical-align: middle;
+      content: " ";
+      height: 100%;
+    }
+  }
+
+  .modal-body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+  }
+        
