@@ -27,6 +27,7 @@
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
   <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
   <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
@@ -76,7 +77,7 @@
 
       <?php
         if(isset($_SESSION['login'])){
-          echo '<a href="assets/php/sair.php" class="book-a-table-btn">Sair</a>';
+          echo '<a href="assets/php/sair.php" class="book-a-table-btn">Sair&nbsp<i class="fa-solid fa-right-from-bracket" style="color: #ffffff;"></i></a>';
         }else{
           echo '<a href="assets/php/testasessao.php" class="book-a-table-btn">Entrar</a>';
         }
@@ -626,7 +627,8 @@
       <div class="modal-content"> 
  <!--**********MONTA CORPO***********--> 
         <div class="modal-body" id="corpoModal">
-          <div class="loader1"></div>
+          <div class="loader1">
+          </div>
           <div class="spinnerContainer">
             <div class="loader">
               <p>carregando</p>
@@ -638,6 +640,10 @@
                 <span class="word">página</span>
               </div>
             </div>
+          </div>
+
+          <div class="finalizar">
+            
           </div>
         </div> 
  <!--**********MONTA RODAPE ***********--> 
