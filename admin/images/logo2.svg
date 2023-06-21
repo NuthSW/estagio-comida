@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="120" height="48" viewBox="0 0 120 48" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path id="a" d="M6 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM2 4C.9 4 0 4.9 0 6s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12-8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-4 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 0C4.9 0 4 .9 4 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+    <path id="c" d="M0 0h50v50H0z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <path d="M0 0h48v48H0z" style="fill: rgb(255, 176, 59);"/>
+    <g transform="matrix(1, 0, 0, 1, 16.104731, 15.266889)">
+      <mask id="b" fill="#fff">
+        <path d="M6 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM2 4C.9 4 0 4.9 0 6s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12-8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm-4 8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-4-4c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM6 0C4.9 0 4 .9 4 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" transform="matrix(1, 0, 0, 1, 0, 0)"/>
+      </mask>
+      <g mask="url(#b)">
+        <path d="M0 0h50v50H0z" transform="matrix(1, 0, 0, 1, -17, -17)" fill="#FFF"/>
+      </g>
+    </g>
+    <text style="fill: rgb(255, 255, 255); font-family: Arial, sans-serif; font-size: 2.4px; white-space: pre;" transform="matrix(9.151762, 0, 0, 8.16129, -502.535828, -154.091553)" x="60.884" y="22.663">ADM</text>
+    <text style="white-space: pre; fill: rgb(51, 51, 51); font-family: Arial, sans-serif; font-size: 2.4px;" x="66.609" y="21.894"> </text>
+  </g>
+</svg>

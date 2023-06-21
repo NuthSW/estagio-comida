@@ -1,27 +1,44 @@
-<?php
+  <?php
   include('banco.php');
   session_start();
 
-  $dia = date('d-m-Y');
+  $dia = date('Y-m-d');
   $horario = date('H:i:s');
-  $id = $_SESSION['idcli'];
+  $idcliente = $_SESSION['idcli'];
 
-  $sql = "insert into tbvenda values(null,'convert($dia, GETDATE() ,101)','$horario',$id)";
+  $sql = "insert into tbvenda values(null,'$dia','$horario',$idcliente)";
+  $consulta1=$conexao->query($sql);
 
-  $consulta=$conexao->query($sql);
+  $sql2 = "select * from tbvenda where vendadata='$dia' and vendahora='$horario'";
+  $consulta2=$conexao->query($sql2);
+  $dados=$consulta2->fetch_array(MYSQLI_ASSOC);
 
+  $idvenda = $dados['idvenda'];
+  
   $pedido = null;
+  $quant = null;
 
   if(isset($_POST['produto'])){
     $pedido = $_POST['produto'];
 
   }
+  if(isset($_POST['qtd'])){
+    $quant = $_POST['qtd'];
+
+  }
   if($pedido != null){
     for($i= 0; $i < count($pedido); $i++){
-      $sql2 = "insert into tbvenda values(null,'1','$pedido[$i]','2')<br>";
+      $sql3 = "insert into tbitemvenda values(null,$idvenda,'$pedido[$i]',$quant[$i])";
 
-      echo $sql2;
+      $consulta3=$conexao->query($sql3);
 
     }
+  }
+  if($consulta3==true){
+    session_start();
+    $_SESSION['idvenda'] = $idvenda;
+    header('location: ../../pedido.php?click=ok');
+  }else{
+    header('location: ../../index.php?click=erro');
   }
 ?>

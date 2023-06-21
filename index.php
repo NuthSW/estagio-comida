@@ -57,7 +57,17 @@
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
 
       <div class="logo me-auto">
-        <h1><a href="index.php">Delixioso</a></h1>
+        <?php
+          if(isset($_GET['login'])){
+            $nome=explode(" ", $_SESSION['nome']);
+            if($_GET['login']=='ok'){
+              echo '<h1><a href="index.php"><span style="color: #ffb03b;">Bem Vindo</span> '.$nome[0].' '.$nome[1].'</a></h1>';
+            }
+          }else{
+            echo '<h1><a href="index.php">Delixioso</a></h1>';
+          }
+        ?>
+        
         <!-- Uncomment below if you prefer to use an image logo -->
         <!-- <a href="index.php"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
       </div>

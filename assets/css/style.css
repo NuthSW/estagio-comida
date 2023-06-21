@@ -2070,3 +2070,209 @@ section {
     font-family: "Poppins", sans-serif;
   }
 }
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.card {
+  position: relative;
+  width: 150px;
+  height: 100px;
+  background: #fff;
+  border-radius: 10px;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.input {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  appearance: none;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  z-index: 10;
+  box-shadow: 1px 1px 10px #aaaaaa,
+              -1px -1px 10px #ffffff;
+}
+
+.input + .check::before {
+  content: "";
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #d0d0d0;
+  border-radius: 50%;
+  background-color: #E8E8E8;
+}
+
+.input:checked + .check::after {
+  content: '';
+  position: absolute;
+  top: 19px;
+  right: 19px;
+  width: 12px;
+  height: 12px;
+  background-color: rgba(0,128,0,0.7);
+  border-radius: 50%;
+}
+
+.input[value="PIX"]:checked + .check::after {
+  background-color: rgba(183, 0, 255, 0.7);
+}
+
+.input[value="Debito"]:checked + .check::after {
+  background-color: rgba(255,165,0,0.7);
+}
+
+.input[value="Dinheiro"]:checked {
+  border: 1.5px solid rgba(0,128,0,0.7);
+}
+
+.input[value="PIX"]:checked {
+  border: 1.5px solid rgba(183, 0, 255, 0.7);
+}
+
+.input[value="Debito"]:checked {
+  border: 1.5px solid rgba(255,165,0,0.7);
+}
+
+.label {
+  color: #323232;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+
+.label .title {
+  margin: 15px 0 0 15px;
+  font-weight: 900;
+  font-size: 15px;
+  letter-spacing: 1.5px;
+}
+
+.label .price {
+  margin: 20px 0 0 15px;
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.label .span {
+  color: gray;
+  font-weight: 700;
+  font-size: 8px;
+}
+
+
+
+.qty-input {
+	color: #000;
+	background: #fff;
+	display: flex;
+	align-items: center;
+	overflow: hidden;
+
+	.product-qty,
+	.qty-count {
+		background: transparent;
+		color: inherit;
+		font-weight: bold;
+		font-size: inherit;
+		border: none;
+		display: inline-block;
+		min-width: 0;
+		height: 2.5rem;
+    margin-bottom: 0.5rem;
+		line-height: 1;
+    border: 3px solid rgb(238, 150, 18);
+		
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	.product-qty {
+		width: 50px;
+		min-width: 0;
+		display: inline-block;
+		text-align: center;
+		appearance: textfield;		
+		
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			appearance: none;
+			margin: 0;
+		}
+	}
+
+	.qty-count {
+		padding: 0;
+		cursor: pointer;
+		width: 2.5rem;
+		font-size: 1.25em;
+		overflow: hidden;
+		position: relative;
+		
+		&:before, 
+		&:after {
+			content: "";
+			height: 2px;
+			width: 10px;
+			position: absolute;
+			display: block;
+			background: #000;
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			margin: auto;
+		}
+		&--minus {
+			border-right: 1px solid #e2e2e2;
+		}
+		&--add {
+			border-left: 1px solid #e2e2e2;
+			&:after {
+				transform: rotate(90deg);
+			}
+		}
+		
+		&:disabled {
+			color: #ccc;
+			background: #f2f2f2;
+			cursor: not-allowed;
+			border-color: transparent;
+			
+			&:before,
+			&:after {
+				background: #ccc;
+			}
+		}
+	}
+}
+
+
+.qty-input {
+	border-radius: 4px;
+	box-shadow: 0 1em 2em -0.9em rgba(#000, 0.7);
+}
+
+#modal{
+  width: 80%;
+}
+
+#modal .modal-content{
+  width: 50vw;
+}

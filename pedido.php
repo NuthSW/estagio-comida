@@ -46,8 +46,8 @@
   <!-- ======= Top Bar ======= -->
   <section id="topbar" class="d-flex align-items-center fixed-top ">
     <div class="container-fluid container-xl d-flex align-items-center justify-content-center justify-content-lg-start">
-      <i class="bi bi-phone d-flex align-items-center"><span>+1 5589 55488 55</span></i>
-      <i class="bi bi-clock ms-4 d-none d-lg-flex align-items-center"><span>Mon-Sat: 11:00 AM - 23:00 PM</span></i>
+      <i class="bi bi-phone d-flex align-items-center"><span>(88) 98936 4809</span></i>
+      <i class="bi bi-clock ms-4 d-none d-lg-flex align-items-center"><span>Seg-Sex: 11:00 - 22:00</span></i>
     </div>
   </section>
 
@@ -85,7 +85,7 @@
           </div>
         </div>
 
-        <form action="assets/php/finalizar.php" method="post">
+        <form action="assets/php/finalizar.php" method="post"> 
           <div class="row menu-container">
 
             <?php
@@ -98,14 +98,20 @@
                 if($consulta->num_rows>0){
                   while($linha=$consulta->fetch_array(MYSQLI_ASSOC)){
                         echo '<div class="col-lg-6 menu-item filter-'.$linha['tipo'].'">
+                        <input type="hidden" class="'.$linha['idpro'].'" value="'.$linha['nome'].'">
                         <div class="menu-content">
                         <label class="check">
-                          <input type="checkbox" class="valor" name="produto[]" id="comida" value="'.$linha['preco'].'|'.$linha['idpro'].'">
+                          <input type="checkbox" class="valor" name="produto[]" id="'.$linha['preco'].'" value="'.$linha['idpro'].'">
                           <div class="checkmark"></div>
                         </label>
                           <a href="#">'.$linha['nome'].'</a><span>R$'.$linha['preco'].'</span>
                         </div>
                         <div class="menu-ingredients">'.$linha['descricao'].'</div>
+                        <div class="qty-input">
+                        	<button class="qty-count qty-count--minus" data-action="minus" id="menos|'.$linha['idpro'].'" type="button">-</button>
+                        	<input class="product-qty" type="number" name="qtd[]" id="'.$linha['idpro'].'" min="1" max="10" value="1">
+                        	<button class="qty-count qty-count--add" data-action="add" id="mais|'.$linha['idpro'].'" type="button">+</button>
+                        </div>  
                       </div>';
                   }
                 }else{
@@ -114,6 +120,7 @@
               }
             ?>
           </div>
+          
 
         </div>
           <section class="inner-page">
@@ -126,7 +133,7 @@
           </section>
           <hr>
           <div class="text-center m-4">
-            <button type="submit" class="button" id="btnFinalizar">
+            <button type="button" class="button" id="btnFinalizar">
               <span class="button__text">
                 Finalizar Compra
               </span>
@@ -201,68 +208,107 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/jquery3/jquery.js"></script>
+  <script src="assets/js/qtyinput.js"></script>
 
   <!-- Inicio do modal -->
 
   <div class="modal fade" id="modal" > 
     <div class="modal-dialog"> 
       <div class="modal-content"> 
+          <div class="section-title text-cente">
+            <h2>Verifique o seu <span>pedido</span></h2>
+          </div>
  <!--**********MONTA CORPO***********--> 
         <div class="modal-body" id="corpoModal">
-          <div class="col-md-12 form-group mb-3">
-            <input type="hidden" class="form-control" name="nome" id="nome" placeholder="Seu Nome" value="<?php echo $_SESSION['idcli'];?>" readonly>
+          <!-- ======= Gallery Section ======= -->
+          <div class="table-responsive text-nowrap col-12" style="transform: scale(1.1)">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th colspan="3">Produto</th>
+                  <th>Preço</th>
+                  <th>Qtd.</th>
+                </tr>
+              </thead>
+               <tbody class="table-border-bottom-0" id="tabelaMostrar">
+               </tbody>
+              </thead>
+                  
+            </table>
           </div>
-            <div class="loader1">
-            </div>
-            <div class="spinnerContainer">
-              <div class="loader">
-                <p>carregando</p>
-                <div class="words">
-                  <span class="word">comidas</span>
-                  <span class="word">imagens</span>
-                  <span class="word">texto</span>
-                  <span class="word">pedido</span>
-                  <span class="word">página</span>
-                </div>
+              
+          <div class="loader1">
+          </div>
+          <div class="spinnerContainer">
+            <div class="loader">
+              <p>carregando</p>
+              <div class="words">
+                <span class="word">comidas</span>
+                <span class="word">imagens</span>
+                <span class="word">texto</span>
+                <span class="word">pedido</span>
+                <span class="word">página</span>
               </div>
             </div>
-
-          <div class="finalizar">
-            
           </div>
         </div> 
+        <div class="text-center"  >
+            <button id="menu-btn" style="width: 50%; margin: 10px 0px">Concluir</button>
+        </div>
  <!--**********MONTA RODAPE ***********--> 
       </div> 
+      
+      
     </div> 
   </div> 
   <!-- Fim do modal -->
 
+  
+
   <script>
     $(document).ready(function() {
-      var dados = $('.valor').val();
-      var val = dados.split('|');
-
+      let qtd = $('.product-qty').val()
+        
       $(".valor").change(function() {
-        var total = $('input[class="valor"]:checked').get().reduce(function(tot, al) {return tot + Number(al.value);}, 0)
+        var total = $('input[class="valor"]:checked').get().reduce(function(tot, al) {return tot + Number(al.id);}, 0)
         $('#resultado').html(total.toFixed(2))
       })//fim calculo de valor
 
       $('#btnFinalizar').click(function(){
+        
+        $("input:checked").each(function(){
+          let id = $(this).val();
+          let preco = $(this).attr('id');
+          let produto = $('.'+id).val();
+          let quantidade = $('#'+id).val();
+          var mostrar = '<tr><td colspan="3">'+produto+'</td><td>'+preco+'</td><td>'+quantidade+'</td></tr>'
+          $("#tabelaMostrar").html(mostrar)
+          
+
+        /*$.post("../assets/php/excluir.php", {id:id}, function(retorno){
+            if(retorno4 != "erro"){
+             swal({icon: 'success',
+                 title: 'Sucesso!',
+                 text: 'Mensagem excluída com sucesso',
+                 buttons: false,
+             });
+             setTimeout(function(){
+                 window.location.reload();
+              }, 1300);
+            }
+          })*/
+          
+        });
+        
+        
         $("#modal").modal('show')
-
-      })//fim mostrar modal
+        $(".loader1").hide()
+        $(".spinnerContainer").hide()
+        
+      })
       
-
-      $.post('../assets/php/buscamsg.php',{texto: texto},function(retorno){
-          if(retorno != 'erro'){
-            $(".loader1").hide();
-            $(".spinnerContainer").hide();
-            $('#corpoTabela').html(retorno);
-
-          }//fim if
-
-      })//fim post
-    });
+      
+    })
 
   </script>
 
