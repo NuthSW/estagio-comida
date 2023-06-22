@@ -209,13 +209,14 @@
   <script src="assets/js/main.js"></script>
   <script src="assets/jquery3/jquery.js"></script>
   <script src="assets/js/qtyinput.js"></script>
+  <script src="assets/sweetalert/sweetalert.min.js" ></script>
 
   <!-- Inicio do modal -->
 
-  <div class="modal fade" id="modal" > 
-    <div class="modal-dialog"> 
+  <div class="modal fade modal-lg" id="modal" > 
+    <div class="modal-dialog modal-xl"> 
       <div class="modal-content"> 
-          <div class="section-title text-cente">
+          <div class="section-title text-center">
             <h2>Verifique o seu <span>pedido</span></h2>
           </div>
  <!--**********MONTA CORPO***********--> 
@@ -253,7 +254,7 @@
           </div>
         </div> 
         <div class="text-center"  >
-            <button id="menu-btn" style="width: 50%; margin: 10px 0px">Concluir</button>
+            <button id="menu-btn" class="concluir" style="width: 50%; margin: 10px 0px">Concluir</button>
         </div>
  <!--**********MONTA RODAPE ***********--> 
       </div> 
@@ -267,7 +268,8 @@
 
   <script>
     $(document).ready(function() {
-      let qtd = $('.product-qty').val()
+      let qtd = $('.product-qty').val();
+      var mostrar = '';
         
       $(".valor").change(function() {
         var total = $('input[class="valor"]:checked').get().reduce(function(tot, al) {return tot + Number(al.id);}, 0)
@@ -276,34 +278,66 @@
 
       $('#btnFinalizar').click(function(){
         
-        $("input:checked").each(function(){
-          let id = $(this).val();
-          let preco = $(this).attr('id');
-          let produto = $('.'+id).val();
-          let quantidade = $('#'+id).val();
-          var mostrar = '<tr><td colspan="3">'+produto+'</td><td>'+preco+'</td><td>'+quantidade+'</td></tr>'
-          $("#tabelaMostrar").html(mostrar)
-          
+        swal({
+                title: "Deseja prosseguir?",
+                text: "Você não poderá voltar pra essa tela novamente.",
+                icon: "warning",
+                buttons: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                  $.post("assets/php/venda.php", function(retorno){
+                    if(retorno != "erro"){
+                    }else{
+                      alert('erro');
+                    }
+                  })  
 
-        /*$.post("../assets/php/excluir.php", {id:id}, function(retorno){
-            if(retorno4 != "erro"){
-             swal({icon: 'success',
-                 title: 'Sucesso!',
-                 text: 'Mensagem excluída com sucesso',
-                 buttons: false,
-             });
-             setTimeout(function(){
-                 window.location.reload();
-              }, 1300);
-            }
-          })*/
-          
-        });
+                  $("input:checked").each(function(){
+                    let id = $(this).val();
+                    let preco = $(this).attr('id');
+                    let produto = $('.'+id).val();
+                    let quantidade = $('#'+id).val();
+
+                    mostrar += '<tr><td colspan="3">'+produto+'</td><td>'+preco+'</td><td>'+quantidade+'</td></tr>'
+                    $("#tabelaMostrar").html(mostrar)
+
+                    $('#modal').on('hide.bs.modal', function (event) {
+                      mostrar = '';
+                      $("#tabelaMostrar").html(mostrar)
+
+                    })
+                    $('.concluir').click(function(){
+                      $.post("assets/php/finalizar.php", {id:id, quantidade: quantidade}, function(retorno){
+                        if(retorno != "erro"){
+                         swal({icon: 'success',
+                             title: 'Sucesso! Compra autorizada.',
+                             text: 'Já estamos preparando o seu pedido!',
+                             buttons: false,
+                         });
+                        }else{
+                          alert('erro');
+                        }
+                        setTimeout(function(){
+                        window.location.assign("index.php");
+                        }, 2000);
+                      })  
+                    })
+                    
+                    
+                  });//fim each
+                  
+                  
+
+                  $("#modal").modal('show')
+                  $(".loader1").hide()
+                  $(".spinnerContainer").hide()
+                }
+              });
+              
         
         
-        $("#modal").modal('show')
-        $(".loader1").hide()
-        $(".spinnerContainer").hide()
+        
         
       })
       

@@ -3,7 +3,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 
 <head>
   <!-- Required meta tags -->
@@ -25,20 +25,6 @@
   <div class="container-scroller d-flex">
     <div class="row p-0 m-0 proBanner" id="proBanner">
       <div class="col-md-12 p-0 m-0">
-        <div class="card-body card-body-padding d-flex align-items-center justify-content-between">
-          <div class="ps-lg-1">
-            <div class="d-flex align-items-center justify-content-between">
-              <p class="mb-0 font-weight-medium me-3 buy-now-text">Free 24/7 customer support, updates, and more with this template!</p>
-              <a href="https://www.bootstrapdash.com/product/spica-admin/?utm_source=organic&utm_medium=banner&utm_campaign=buynow_demo" target="_blank" class="btn me-2 buy-now-btn border-0">Get Pro</a>
-            </div>
-          </div>
-          <div class="d-flex align-items-center justify-content-between">
-            <a href="https://www.bootstrapdash.com/product/spica-admin/"><i class="mdi mdi-home me-3 text-white"></i></a>
-            <button id="bannerClose" class="btn border-0 p-0">
-              <i class="mdi mdi-close text-white mr-0"></i>
-            </button>
-          </div>
-        </div>
       </div>
     </div>
     <!-- partial:./partials/_sidebar.html -->
@@ -249,10 +235,28 @@
   <script src="js/dashboard.js"></script>
   <!-- End custom js for this page-->
   <script src="../assets/sweetalert/sweetalert.min.js" ></script>
-  <script src="assets/jquery3/jquery.js"></script>
+  <script src="../assets/jquery3/jquery.js"></script>
   <!-- End own json files-->
 
-  <script type="text/javascript">
+  <!-- Inicio do modal -->
+  <div class="modal fade" id="modal" > 
+    <div class="modal-dialog"> 
+      <div class="modal-content"> 
+  <!-- ************ MONTA CABEÇALHO ******************--> 
+        <div class="modal-header" style="display: flex;justify-content: flex-end;"> 
+          <button type="button" class="close" id="fecharModal" data-dismiss="modal"> 
+          <span>X</span></button> 
+        </div> 
+ <!--********** MONTA CORPO***********--> 
+        <div class="modal-body" id="corpoModal">
+        </div> 
+ <!--********** MONTA RODAPE ***********--> 
+      </div> 
+    </div> 
+  </div> 
+  <!-- Fim do modal -->
+
+  <script>
     $(document).ready(function(){
       let texto = $('#texto').val();
 
@@ -264,11 +268,13 @@
 
 
       $('#busca').submit(function(){
+        alert(texto)
+        console.log(texto )
         $.post("../assets/php/cliente/busca.php", {texto:texto}, function(retorno2){
           if(retorno2 != "erro"){
            swal({icon: 'success',
                title: 'Sucesso!',
-               text: 'Busca feita com sucesso',
+               text: retorno2,
                buttons: false,
            });
            $('#tabela').html(retorno2);
@@ -276,6 +282,72 @@
         })
 
       })
+
+
+      $('#tabela').on('click','button',function(){
+        let acao = $(this).attr('id');
+
+        if(acao == 'mostrar'){
+          $("#modal").modal('show')
+
+          //Início do fechar modal
+          $("#fecharModal").click(function(){
+            $("#modal").modal('hide')
+          })//Fim do fechar modal
+
+          let id = $(this).val();
+          $.post("../assets/php/cliente/mostrar.php", {id:id}, function(retorno3){
+            if(retorno3 != "erro"){
+              $('#corpoModal').html(retorno3);
+            }
+          })
+        }//fim do mostrar
+
+        if(acao == 'excluir'){
+          swal({
+            title: "Excluir?",
+            text: "Essa ação não poderá ser desfeita.",
+            icon: "warning",
+            buttons: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+              let id = $(this).val();
+              $.post("../assets/php/cliente/excluir.php", {id:id}, function(retorno4){
+               if(retorno4 != "erro"){
+                swal({icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Perfil excluído com sucesso',
+                    buttons: false,
+                });
+                setTimeout(function(){
+                    window.location.reload();
+                 }, 1300);
+               }
+              })
+            }
+          });
+        }
+
+
+
+
+      })
+
+      <?php
+          if(isset($_GET['edit'])){
+            if($_GET['edit']=='ok'){
+              echo "swal({icon: 'success',
+                title: 'Sucesso!',
+                text: 'Usuário alterado com sucesso',
+                buttons: true,
+            });";
+            }
+          }else{
+            echo '';
+          }
+      ?>
+      
 
 
     })

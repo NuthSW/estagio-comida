@@ -46,18 +46,5 @@ $(document).ready(function(){
     let bairro = $('#bairro').val();
     let comp1 = $('#comp1').val();
     let comp2 = $('#comp2').val();
-
-    $('#btnEnvia').click(function(){
-        $.post('../php/formcad.php',{nome: nome,cpf: cpf,fone: fone,email: email,senha: senha,cep: cep,estado: estado,cidade: cidade,endereco: endereco,
-        numero: numero,bairro: bairro,comp1: comp1,comp2: comp2},
-        function(retorno){
-            if(retorno != 'erro'){
-              $("load").hide();
-              $('#corpoTabela').html(retorno);
-            
-            }//fim if
-          
-        })//fim post
-    })
 //------ End Insert ------//
 })
