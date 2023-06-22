@@ -58,11 +58,9 @@
 
       <div class="logo me-auto">
         <?php
-          if(isset($_GET['login'])){
+          if(isset($_SESSION['nome'])){
             $nome=explode(" ", $_SESSION['nome']);
-            if($_GET['login']=='ok'){
-              echo '<h1><a href="index.php"><span style="color: #ffb03b;">Bem Vindo</span> '.$nome[0].' '.$nome[1].'</a></h1>';
-            }
+            echo '<h1><a href="index.php"><span style="color: #ffb03b;">Bem Vindo</span> '.$nome[0].' '.$nome[1].'</a></h1>';
           }else{
             echo '<h1><a href="index.php">Delixioso</a></h1>';
           }

@@ -123,14 +123,6 @@
           
 
         </div>
-          <section class="inner-page">
-            <div class="container">
-              <h1 class="col-6 float-start" style="font-family: 'Poppins', sans-serif;">
-                Total a pagar:
-              </h1>
-              <h1 class="float-end">R$<span id="resultado">0,00</span></h1>
-            </div>
-          </section>
           <hr>
           <div class="text-center m-4">
             <button type="button" class="button" id="btnFinalizar">
@@ -213,7 +205,7 @@
 
   <!-- Inicio do modal -->
 
-  <div class="modal fade modal-lg" id="modal" > 
+  <div class="modal fade modal-lg" id="modal" data-backdrop="static"> 
     <div class="modal-dialog modal-xl"> 
       <div class="modal-content"> 
           <div class="section-title text-center">
@@ -236,6 +228,10 @@
               </thead>
                   
             </table>
+            <div id="total">
+
+
+            </div>
           </div>
               
           <div class="loader1">
@@ -268,13 +264,9 @@
 
   <script>
     $(document).ready(function() {
-      let qtd = $('.product-qty').val();
+      var qtd = $('.product-qty').val();
       var mostrar = '';
-        
-      $(".valor").change(function() {
-        var total = $('input[class="valor"]:checked').get().reduce(function(tot, al) {return tot + Number(al.id);}, 0)
-        $('#resultado').html(total.toFixed(2))
-      })//fim calculo de valor
+      var total= 0;
 
       $('#btnFinalizar').click(function(){
         
@@ -299,14 +291,15 @@
                     let produto = $('.'+id).val();
                     let quantidade = $('#'+id).val();
 
+                    total += preco*quantidade
+
                     mostrar += '<tr><td colspan="3">'+produto+'</td><td>'+preco+'</td><td>'+quantidade+'</td></tr>'
                     $("#tabelaMostrar").html(mostrar)
 
-                    $('#modal').on('hide.bs.modal', function (event) {
-                      mostrar = '';
-                      $("#tabelaMostrar").html(mostrar)
 
-                    })
+                    $("#total").html('<div class="container"><h1 class="col-6 float-start" style="font-family: "Poppins", sans-serif;">Total:</h1><h1 class="float-end">R$<span id="resultado">'+total+'</span></h1></div>')
+
+                    
                     $('.concluir').click(function(){
                       $.post("assets/php/finalizar.php", {id:id, quantidade: quantidade}, function(retorno){
                         if(retorno != "erro"){
@@ -328,7 +321,7 @@
                   });//fim each
                   
                   
-
+                  $("#modal").modal({backdrop: 'static', keyboard: false})
                   $("#modal").modal('show')
                   $(".loader1").hide()
                   $(".spinnerContainer").hide()

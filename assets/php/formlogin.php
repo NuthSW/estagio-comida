@@ -14,7 +14,13 @@
         $_SESSION['login'] ='ok';
         $_SESSION['nome'] = $dados['nome'];
         $_SESSION['idcli'] = $dados['idcli'];
-        header('location: ../../index.php?login=ok');
+        if($dados['tipo']=='A'){
+            header('location: ../../admin/index.php');
+
+        }else{
+            header('location: ../../index.php');  
+        }
+        
     }else{
         header('location: ../../login.php?login=erro');
     }

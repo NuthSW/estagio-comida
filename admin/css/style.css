@@ -10572,7 +10572,6 @@ progress {
   background-color: color(white);
   background-clip: padding-box;
   border: 1px solid #ced4da;
-  appearance: none;
   border-radius: 2px;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
@@ -22383,7 +22382,8 @@ form{
   margin: 10px 0px;
 }
 
-.textfield > input{
+.textfield > input,
+.textfield > textarea{
   width: 100%;
   border: none;
   border-radius: 10px;
@@ -22452,5 +22452,11 @@ form{
   .card-login{
       width: 90%;
   }
+}
+
+
+.form-control > option {
+    background: #6c757d;
+    color: white;
 }
 /*------ End Responsivo ------*/

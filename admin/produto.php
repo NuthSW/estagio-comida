@@ -34,13 +34,13 @@
           <p>Gestão</p>
           <span></span>
         </li>
-        <li class="nav-item active">
+        <li class="nav-item">
           <a class="nav-link" href="index.php">
             <i class="mdi mdi-account menu-icon"></i>
             <span class="menu-title">Usuários</span>
           </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item active">
           <a class="nav-link" href="produto.php">
             <i class="mdi mdi-basket menu-icon"></i>
             <span class="menu-title">Produtos</span>
@@ -108,6 +108,9 @@
           <div class="row">
             <div class="col-lg-12 grid-margin stretch-card">
               <div class="card">
+                <a href="addpro.php" class="m-4 float-end" style="width: 8%;">
+                  <button type="submit" class="btn btn-success" title="Adcionar" id="adcionar" style="color:white;font-weight:600;font-size:14pt;"><i class="mdi mdi-hospital m-1" style="color: #fff;"></i>Novo</button>
+                </a>
                 <div class="card-body">
                   <div class="table-responsive">
                     <table class="table table">
@@ -117,22 +120,16 @@
                             #
                           </th>
                           <th>
-                            Cliente
+                            Produto
                           </th>
                           <th>
-                            CPF
+                            Tipo
                           </th>
                           <th>
-                            Fone
+                            Descricao
                           </th>
                           <th>
-                            Email
-                          </th>
-                          <th>
-                            CEP
-                          </th>
-                          <th>
-                            Nº 
+                            Preco
                           </th>
                           <th>
                             Ações
@@ -204,22 +201,25 @@
       let texto = $('#texto').val();
       
 
-      $.post("../assets/php/cliente/busca.php", {texto:texto}, function(retorno){
-          if(retorno != "erro"){
-           $('#tabela').html(retorno);
-          }
-        })
+      $.post("../assets/php/produtos/busca.php", {texto:texto}, function(retorno){
+        if(retorno != "erro"){
+         $('#tabela').html(retorno);
+
+        }
+      })//fim busca primaria
 
 
       $('#busca').submit(function(){
         texto = $('#texto').val();
-        $.post("../assets/php/cliente/busca.php", {texto:texto}, function(retorno2){
+        $.post("../assets/php/produtos/busca.php", {texto:texto}, function(retorno2){
           if(retorno2 != "erro"){
            $('#tabela').html(retorno2);
+
           }
+
         })
 
-      })
+      })//fim busca submit
 
 
       $('#tabela').on('click','button',function(){
@@ -234,11 +234,14 @@
           })//Fim do fechar modal
 
           let id = $(this).val();
-          $.post("../assets/php/cliente/mostrar.php", {id:id}, function(retorno3){
+          $.post("../assets/php/produtos/mostrar.php", {id:id}, function(retorno3){
             if(retorno3 != "erro"){
               $('#corpoModal').html(retorno3);
+
             }
+
           })
+
         }//fim do mostrar
 
         if(acao == 'excluir'){
@@ -251,7 +254,7 @@
           .then((willDelete) => {
             if (willDelete) {
               let id = $(this).val();
-              $.post("../assets/php/cliente/excluir.php", {id:id}, function(retorno4){
+              $.post("../assets/php/produtos/excluir.php", {id:id}, function(retorno4){
                if(retorno4 != "erro"){
                 swal({icon: 'success',
                     title: 'Sucesso!',
@@ -262,50 +265,34 @@
                     window.location.reload();
                  }, 1300);
                }
+
               })
+
             }
+
           });
-        }//fim excluir
 
-        if(acao == 'promover'){
-          swal({
-            title: "Promover?",
-            text: "Essa ação não poderá ser desfeita.",
-            icon: "warning",
-            buttons: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-              let id = $(this).val();
-              $.post("../assets/php/cliente/promover.php", {id:id}, function(retorno5){
-               if(retorno5 != "erro"){
-                swal({icon: 'success',
-                    title: 'Sucesso!',
-                    text: 'Novo ADM criado com sucesso',
-                    buttons: false,
-                });
-                setTimeout(function(){
-                    window.location.reload();
-                 }, 1300);
-               }
-              })
-            }
-          });
-        }//fim promover
+        }//fim do excluir
 
 
-
-
-      })
+      })//fim #tabela
 
       <?php
-          if(isset($_GET['edit'])){
-            if($_GET['edit']=='ok'){
+          if(isset($_GET['passou'])){
+            if($_GET['passou']=='edit'){
               echo "swal({icon: 'success',
                 title: 'Sucesso!',
-                text: 'Usuário alterado com sucesso',
+                text: 'Produto alterado com sucesso',
                 buttons: true,
-            });";
+                });";
+                $_GET['passou']=='';
+            }else if($_GET['passou']=='addpro'){
+              echo "swal({icon: 'success',
+                title: 'Sucesso!',
+                text: 'Produto adcionado com sucesso',
+                buttons: true,
+                });";
+                $_GET['passou']=='';
             }
           }else{
             echo '';

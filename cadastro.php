@@ -18,27 +18,27 @@
         <div class="right">
             <div class="card-login">
                 <h1>Cadastro</h1>
-                <form name="formcad" id="formcad" action="assets/php/formcad.php" method="post" role="form">
+                <form name="formcad" id="formcad" action="assets/php/cliente/adcionar.php" method="post" role="form">
                     <div class="registo" id="fase1">
                         <div class="textfield">
                             <label for="usuario">Nome de Usuário</label>
-                            <input type="text" name="nome" id="nome" placeholder="Seu nome completo">
+                            <input type="text" name="nome" id="nome" required placeholder="Seu nome completo">
                         </div>
                         <div class="textfield">
                             <label for="usuario">CPF</label>
-                            <input type="text" name="cpf" id="cpf" placeholder="999.999.999-00">
+                            <input type="text" name="cpf" id="cpf" required placeholder="999.999.999-00">
                         </div>
                         <div class="textfield">
                             <label for="usuario">Número</label>
-                            <input type="text" name="fone" id="fone" placeholder="(88) 99999-9999">
+                            <input type="text" name="fone" id="fone" required placeholder="(88) 99999-9999">
                         </div>
                         <div class="textfield">
                             <label for="usuario">Email</label>
-                            <input type="email" name="email" id="email" placeholder="Seu email">
+                            <input type="email" name="email" id="email" required placeholder="Seu email">
                         </div>
                         <div class="password-eye">
                             <label for="usuario">Senha</label>
-                            <input type="password" name="senha" id="senha" placeholder="***********">
+                            <input type="password" name="senha" id="senha" required placeholder="***********">
                             <i class="fa-solid fa-eye" id="eye"></i>
                         </div>
                         <a href="login.php">
@@ -49,31 +49,31 @@
                     <div class="registro" id="fase2">
                         <div class="textfield">
                             <label for="usuario">CEP</label>
-                            <input type="text" name="cep" id="cep" placeholder="99999-999">
+                            <input type="text" name="cep" id="cep" required placeholder="99999-999">
                         </div>
                         <div class="textfield">
                             <label for="usuario">Estado</label>
-                            <input type="text" name="estado" id="estado" placeholder="-------">
+                            <input type="text" name="estado" id="estado" required placeholder="-------">
                         </div>
                         <div class="textfield">
                             <label for="usuario">Cidade</label>
-                            <input type="text" name="cidade" id="cidade" placeholder="-------">
+                            <input type="text" name="cidade" id="cidade" required placeholder="-------">
                         </div>
                         <div class="textfield">
                             <label for="usuario">Endereço</label>
-                            <input type="text" name="endereco" id="endereco" placeholder="-------">
+                            <input type="text" name="endereco" id="endereco" required placeholder="-------">
                         </div>
                         <div class="textfield" style="float: left; width: 20%;">
                             <label for="usuario">Número</label>
-                            <input type="text" name="numero" id="numero" placeholder="-------">
+                            <input type="text" name="numero" id="numero" required placeholder="-------">
                         </div>
                         <div class="textfield" style="float: right; width: 75%;">
                             <label for="usuario">Bairro</label>
-                            <input type="text" name="bairro" id="bairro" placeholder="-------">
+                            <input type="text" name="bairro" id="bairro" required placeholder="-------">
                         </div>
                         <div class="textfield">
                             <label for="usuario">Complemento 1</label>
-                            <input type="text" name="comp1" id="comp1" placeholder="-------">
+                            <input type="text" name="comp1" id="comp1" required placeholder="-------">
                         </div>
                         <div class="textfield">
                             <label for="usuario">Complemento 2<sub>(opcional)</sub></label>
@@ -123,7 +123,7 @@
 
         })
 
-        $('#btnEnvia').click(function(){
+        /*$('#btnEnvia').click(function(){
             $.post('../php/formcad.php',{nome: nome,cpf: cpf,fone: fone,email: email,senha: senha,cep: cep,estado: estado,cidade: cidade,endereco: endereco,
             numero: numero,bairro: bairro,comp1: comp1,comp2: comp2},
             function(retorno){
@@ -134,7 +134,7 @@
                 }//fim if
             
             })//fim post
-        })
+        })*/
     </script>
 
 </body>
