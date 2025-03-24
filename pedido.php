@@ -297,7 +297,7 @@
                     $("#tabelaMostrar").html(mostrar)
 
 
-                    $("#total").html('<div class="container"><h1 class="col-6 float-start" style="font-family: "Poppins", sans-serif;">Total:</h1><h1 class="float-end">R$<span id="resultado">'+total+'</span></h1></div>')
+                    $("#total").html('<div class="container"><h1 class="col-6 float-start" style="font-family: "Poppins", sans-serif;">Total:</h1><h1 class="float-end">R$<span id="resultado">'+total.toFixed(2)+'</span></h1></div>')
 
                     
                     $('.concluir').click(function(){
