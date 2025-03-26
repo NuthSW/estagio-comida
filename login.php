@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/css/login.css">
-    <title>DeliciOVO - Login</title>
+    <title>Delixioso - Login</title>
 </head>
 <body>
     <div class="main-login">
@@ -23,7 +23,6 @@
                     <div class="textfield">
                         <label for="usuario">Senha</label>
                         <input type="password" name="senha" id="senha" placeholder="Sua senha">
-                        <a href="recuperar.html"><p>Esqueceu a sua senha?</p></a>
                     </div>
                     <button id="btnLogin" class="btn-login">Login</button>
                 </form>
